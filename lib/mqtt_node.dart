@@ -1,10 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'client_helper.dart';
+
 Timer? backgroundTask;
 bool isRunning = false;
 
 bool run() {
+
+  ClientHelper.initInstance();
 
   print('Enter command (s[tart]/f[inal]/e|x[xit]):');
 

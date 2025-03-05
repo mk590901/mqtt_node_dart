@@ -39,13 +39,26 @@ class Slicer {
   String messagesAssembly(List<String> messages) {
     String result = '';
     chunks.clear();
-    for (String payload in messages) {
-      String? restoredMessage = addChunk(payload);
-      if (restoredMessage != null) {
-        print('Message restored: $restoredMessage');
-        result = restoredMessage;
+    Map<int,String> map = composeMap(messages);
+    for (int i = 0; i < messages.length; i++) {
+      String? payload = map[i];
+      if (payload != null) {
+        String? restoredMessage = addChunk(payload);
+        if (restoredMessage != null) {
+          print('Message restored: $restoredMessage');
+          result = restoredMessage;
+        }
       }
     }
+
+    // for (String payload in messages) {
+    //   String? restoredMessage = addChunk(payload);
+    //   if (restoredMessage != null) {
+    //     print('Message restored: $restoredMessage');
+    //     result = restoredMessage;
+    //   }
+    // }
+
     return result;
   }
 
@@ -78,6 +91,16 @@ class Slicer {
       return assembleMessage(messageId);
     }
     return null;
+  }
+
+  Map<int,String> composeMap(List<String> messages) {
+    Map<int,String> result = {};
+    for (String payload in messages) {
+      Map<String,dynamic> chunk = jsonDecode(payload);
+      int index = chunk['index'];
+      result[index] = payload;
+    }
+    return result;
   }
 
 }

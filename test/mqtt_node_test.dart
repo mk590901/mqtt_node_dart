@@ -71,4 +71,42 @@ void main() {
 
   });
 
+  // test('scheduler two files', () {
+  //
+  //   Scheduler scheduler = Scheduler();
+  //
+  //   Slicer slicer = Slicer('1234', 32);
+  //
+  //   String messageOne = randomString(100);
+  //   List<String> bundleOne = slicer.chunkMessage('test1.txt', messageOne);
+  //   expect(bundleOne.length, 4);
+  //
+  //   String messageTwo = randomString(150);
+  //   List<String> bundleTwo = slicer.chunkMessage('test2.txt', messageTwo);
+  //   expect(bundleTwo.length, 5);
+  //
+  //   ChunksWrapper? wrapper;
+  //   wrapper = scheduler.addChunk(bundleOne[0]); //1
+  //   expect(wrapper, isNull);
+  //   wrapper = scheduler.addChunk(bundleTwo[0]);
+  //   expect(wrapper, isNull);
+  //   wrapper = scheduler.addChunk(bundleTwo[1]);
+  //   expect(wrapper, isNull);
+  //   wrapper = scheduler.addChunk(bundleOne[1]); //2
+  //   expect(wrapper, isNull);
+  //   wrapper = scheduler.addChunk(bundleTwo[2]);
+  //   expect(wrapper, isNull);
+  //   wrapper = scheduler.addChunk(bundleOne[2]); //3
+  //   expect(wrapper, isNull);
+  //   wrapper = scheduler.addChunk(bundleOne[3]); //4
+  //   expect(wrapper, isNotNull);
+  //   wrapper = scheduler.addChunk(bundleTwo[3]);
+  //   expect(wrapper, isNull);
+  //   wrapper = scheduler.addChunk(bundleTwo[4]);
+  //   expect(wrapper, isNotNull);
+  //
+  //   // String out = slicer.messagesAssembly(wrapper.chunks);
+  //   // expect(messageOne, equals(out));
+  //
+  // });
 }

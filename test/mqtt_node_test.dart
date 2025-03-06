@@ -26,7 +26,7 @@ void main() {
 
   });
 
-  test('scheduler', () {
+  test('scheduler one', () {
 
     Scheduler scheduler = Scheduler();
 
@@ -48,15 +48,26 @@ void main() {
     String out = slicer.messagesAssembly(wrapper!.chunks);
     expect(message, equals(out));
 
+  });
 
-    // Slicer slicer = Slicer('1234', 64);
-    // String message = randomString(300);
-    //
-    // List<String> bundle = slicer.chunkMessage('test.txt', message);
-    // expect(bundle.length, 5);
-    //
-    // String out = slicer.messagesAssembly(bundle);
-    // expect(message, equals(out));
+  test('scheduler two', () {
+
+    Scheduler scheduler = Scheduler();
+
+    Slicer slicer = Slicer('1234', 1024);
+    String message = randomString(7000);
+    List<String> bundle = slicer.chunkMessage('test.txt', message);
+    expect(bundle.length, 7);
+
+    ChunksWrapper? wrapper;
+    int i = 0;
+    do {
+      wrapper = scheduler.addChunk(bundle[i++]);
+    }
+    while (wrapper == null) ;
+
+    String out = slicer.messagesAssembly(wrapper!.chunks);
+    expect(message, equals(out));
 
   });
 

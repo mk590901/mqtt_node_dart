@@ -13,14 +13,27 @@ class Scheduler {
     String client = chunk['client'];
     String file = chunk['file'];
 
-    FileChunks? fileChunk;
-    if (!_container.containsKey(client)) {
-      fileChunk = FileChunks(file);
-      _container[client] = fileChunk;
+    if (!existClient(client)) {
+      createClientAndFileChunksHeader(file, client);
     }
-    fileChunk = _container[client];
-    result = fileChunk?.addChunk(jsonString);
+    result = addChunkToClient(client, jsonString);
     return result;
+  }
+
+  ChunksWrapper? addChunkToClient(String client, String jsonString) {
+    FileChunks? fileChunk;
+    fileChunk = _container[client];
+    ChunksWrapper? result = fileChunk?.addChunk(jsonString);
+    return result;
+  }
+
+  void createClientAndFileChunksHeader(String file, String client) {
+    FileChunks? fileChunk = FileChunks(file);
+    _container[client] = fileChunk;
+  }
+
+  bool existClient(String client) {
+    return _container.containsKey(client);
   }
 
   void removeEntry(final String client) {

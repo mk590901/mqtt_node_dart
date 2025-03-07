@@ -11,5 +11,8 @@ class FilesContainer {
     return _container[file];
   }
 
+  bool contains (final String file) {
+    return _container.containsKey(file);
+  }
 
 }

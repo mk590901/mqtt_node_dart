@@ -1,9 +1,16 @@
+import 'package:mqtt_node/slicer/chunks_wrapper.dart';
+import 'package:mqtt_node/slicer/scheduler.dart';
+import 'package:mqtt_node/slicer/slicer.dart';
+
 import 'mqtt_cs_8_helper.dart';
 import 'typedef.dart';
 
 class MQTTBridge {
   late  MqttHelper  _hsmHelper;
   final VoidCallbackBoolString callbackFunction;
+
+  final Scheduler scheduler = Scheduler();
+  final Slicer slicer = Slicer('1234', 1024);
 
   late VoidBridgeCallback? bridgeCB;
 
@@ -17,7 +24,20 @@ class MQTTBridge {
 
   void response(String tag, bool ok, String text, bool next) {
 
-    print('MQTTBridge.response [$tag]->[$text]->[$ok]');
+    //print('MQTTBridge.response [$tag]->[$text]->[$ok]');
+    print('MQTTBridge.response [$tag]->[$ok]');
+
+    if (tag == 'Publish') {
+      ChunksWrapper? wrapper = scheduler.addChunk(text);
+      if (wrapper == null) {
+        print('@@@@@@@ continue @@@@@@@');
+      }
+      else {
+        print('@@@@@@@ end @@@@@@@');
+        String text = slicer.messagesAssembly(wrapper.chunks);
+        print (text);
+      }
+    }
 
     VoidBridgeCallback? cb = getCallbackFunction();
     cb?.call(ok,text);

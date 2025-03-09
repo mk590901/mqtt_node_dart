@@ -47,7 +47,7 @@ class Scheduler {
     _container[client] = container;
   }
 
-  bool existFlleChunks(client, file) {
+  bool existFlleChunks(String client, String file) {
     FilesContainer? container = _container[client];
     if (container == null) {
       return false;
@@ -59,9 +59,25 @@ class Scheduler {
     return _container.containsKey(client);
   }
 
-  void removeEntry(final String client) {
+  void removeClientEntry(final String client) {
     _container.remove(client);
   }
+
+  void removeFileEntry(final String client, final String file) {
+    FilesContainer? container = _container[client];
+    if (container == null) {
+      return;
+    }
+    container.remove(file);
+    if (container.isEmpty()) {
+      _container.remove(client);
+    }
+  }
+
+  bool isEmpty () {
+    return _container.isEmpty;
+  }
+
 }
 
 // Var 1

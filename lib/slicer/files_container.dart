@@ -15,4 +15,12 @@ class FilesContainer {
     return _container.containsKey(file);
   }
 
+  void remove (final String file) {
+    _container.remove(file);
+  }
+
+  bool isEmpty () {
+    return _container.isEmpty;
+  }
+
 }

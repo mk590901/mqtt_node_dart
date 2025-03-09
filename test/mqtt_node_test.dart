@@ -103,6 +103,9 @@ void main() {
 
     String outOne = slicer.messagesAssembly(wrapper!.chunks);
     expect(messageOne, equals(outOne));
+    scheduler.removeFileEntry(wrapper.clientId, wrapper.fileName);
+    expect(scheduler.existFlleChunks(wrapper.clientId, wrapper.fileName),false);
+    expect(scheduler.isEmpty(),false);
 
     wrapper = scheduler.addChunk(bundleTwo[3]);
     expect(wrapper, isNull);
@@ -111,6 +114,9 @@ void main() {
 
     String outTwo = slicer.messagesAssembly(wrapper!.chunks);
     expect(messageTwo, equals(outTwo));
+    scheduler.removeFileEntry(wrapper.clientId, wrapper.fileName);
+    expect(scheduler.existFlleChunks(wrapper.clientId, wrapper.fileName),false);
+    expect(scheduler.isEmpty(),true);
 
   });
 
@@ -146,6 +152,9 @@ void main() {
 
     String outOne = slicer.messagesAssembly(wrapper!.chunks);
     expect(messageOne, equals(outOne));
+    scheduler.removeFileEntry(wrapper.clientId, wrapper.fileName);
+    expect(scheduler.existFlleChunks(wrapper.clientId, wrapper.fileName),false);
+    expect(scheduler.isEmpty(),false);
 
     wrapper = scheduler.addChunk(bundleTwo[3]);
     expect(wrapper, isNull);
@@ -154,6 +163,9 @@ void main() {
 
     String outTwo = slicer.messagesAssembly(wrapper!.chunks);
     expect(messageTwo, equals(outTwo));
+    scheduler.removeFileEntry(wrapper.clientId, wrapper.fileName);
+    expect(scheduler.existFlleChunks(wrapper.clientId, wrapper.fileName),false);
+    expect(scheduler.isEmpty(),true);
 
   });
 
@@ -191,6 +203,9 @@ void main() {
 
     String outOne = slicerOne.messagesAssembly(wrapper!.chunks);
     expect(messageOne, equals(outOne));
+    scheduler.removeFileEntry(wrapper.clientId, wrapper.fileName);
+    expect(scheduler.existFlleChunks(wrapper.clientId, wrapper.fileName),false);
+    expect(scheduler.isEmpty(),false);
 
     wrapper = scheduler.addChunk(bundleTwo[3]);
     expect(wrapper, isNull);
@@ -199,6 +214,9 @@ void main() {
 
     String outTwo = slicerTwo.messagesAssembly(wrapper!.chunks);
     expect(messageTwo, equals(outTwo));
+    scheduler.removeFileEntry(wrapper.clientId, wrapper.fileName);
+    expect(scheduler.existFlleChunks(wrapper.clientId, wrapper.fileName),false);
+    expect(scheduler.isEmpty(),true);
 
   });
 

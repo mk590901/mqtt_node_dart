@@ -157,4 +157,49 @@ void main() {
 
   });
 
+  test('scheduler two files 3', () {
+
+    Scheduler scheduler = Scheduler();
+
+    Slicer slicerOne = Slicer('1234', 32);
+
+    String messageOne = randomString(100);
+    List<String> bundleOne = slicerOne.chunkMessage('test1.txt', messageOne);
+    expect(bundleOne.length, 4);
+
+    Slicer slicerTwo = Slicer('4321', 32);
+
+    String messageTwo = randomString(150);
+    List<String> bundleTwo = slicerTwo.chunkMessage('test2.txt', messageTwo);
+    expect(bundleTwo.length, 5);
+
+    ChunksWrapper? wrapper;
+    wrapper = scheduler.addChunk(bundleOne[3]); //1
+    expect(wrapper, isNull);
+    wrapper = scheduler.addChunk(bundleTwo[0]);
+    expect(wrapper, isNull);
+    wrapper = scheduler.addChunk(bundleTwo[1]);
+    expect(wrapper, isNull);
+    wrapper = scheduler.addChunk(bundleOne[1]); //2
+    expect(wrapper, isNull);
+    wrapper = scheduler.addChunk(bundleTwo[2]);
+    expect(wrapper, isNull);
+    wrapper = scheduler.addChunk(bundleOne[2]); //3
+    expect(wrapper, isNull);
+    wrapper = scheduler.addChunk(bundleOne[0]); //4
+    expect(wrapper, isNotNull);
+
+    String outOne = slicerOne.messagesAssembly(wrapper!.chunks);
+    expect(messageOne, equals(outOne));
+
+    wrapper = scheduler.addChunk(bundleTwo[3]);
+    expect(wrapper, isNull);
+    wrapper = scheduler.addChunk(bundleTwo[4]);
+    expect(wrapper, isNotNull);
+
+    String outTwo = slicerTwo.messagesAssembly(wrapper!.chunks);
+    expect(messageTwo, equals(outTwo));
+
+  });
+
 }

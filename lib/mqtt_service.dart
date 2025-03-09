@@ -105,7 +105,7 @@ class MqttService {
 
   void onMessageReceived(String topic, MqttPublishMessage message) {
     final String payload = MqttPublishPayload.bytesToStringAsString(message.payload.message);
-    print('Received message: $payload from topic: $topic');
+    print('Received message: $payload from topic: $topic : [${payload.length}]');
     _cb.call('Publish', true, payload, true);
     //@@@bridge.post('Unsubscribe');  //  04.03.2025, Mk
   }

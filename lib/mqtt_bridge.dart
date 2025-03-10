@@ -2,6 +2,7 @@ import 'package:mqtt_node/slicer/chunks_wrapper.dart';
 import 'package:mqtt_node/slicer/scheduler.dart';
 import 'package:mqtt_node/slicer/slicer.dart';
 
+import 'io_operations.dart';
 import 'mqtt_cs_8_helper.dart';
 import 'typedef.dart';
 
@@ -36,7 +37,7 @@ class MQTTBridge {
         print('@@@@@@@ end @@@@@@@');
         String text = slicer.messagesAssembly(wrapper.chunks);
         scheduler.removeFileEntry(wrapper.clientId, wrapper.fileName);
-        print (text);
+        saveFile (wrapper.fileName, text);
       }
     }
 

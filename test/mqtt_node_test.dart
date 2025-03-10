@@ -1,16 +1,50 @@
 import 'dart:math';
-
-import 'package:mqtt_node/mqtt_node.dart';
 import 'package:mqtt_node/slicer/chunks_wrapper.dart';
 import 'package:mqtt_node/slicer/scheduler.dart';
 import 'package:mqtt_node/slicer/slicer.dart';
 import 'package:test/test.dart';
 
+import 'dart:io' show Directory, File, Platform;
+import 'package:platform/platform.dart' show LocalPlatform;
 
 String randomString(int length) {
   const String chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   Random random = Random();
   return List.generate(length, (index) => chars[random.nextInt(chars.length)]).join();
+}
+
+String? getUserHomeDirectory() {
+  String? result = '';
+  try {
+    // Path to platform
+    final platform = LocalPlatform();
+    // Path to home user folder
+    result = platform.environment['HOME'];
+  } catch (e) {
+    print('Error: $e');
+  }
+  return result;
+}
+
+void createFileWithDirectories(String filePath) {
+  try {
+    // Extract folder
+    final directory = Directory(filePath.substring(0, filePath.lastIndexOf('/')));
+
+    // Create intermediately folders
+    directory.createSync(recursive: true);
+
+    // Create file
+    final file = File(filePath);
+    file.createSync();
+
+    // Write content
+    file.writeAsStringSync('// ******* Code *******');
+
+    print('File was created: $filePath');
+  } catch (e) {
+    print('File creation error: $e');
+  }
 }
 
 void main() {
@@ -219,5 +253,24 @@ void main() {
     expect(scheduler.isEmpty(),true);
 
   });
+
+  test('File creation', () {
+    String  fileName = 'HsmProjects/mqtt_cs_9.hsm/generic_code/dart/mqtt_cs_9_helper.dart';
+    String? homeFolder = getUserHomeDirectory();
+    String  docsFolder = 'Documents';
+    String  repository = 'Repository';
+    print ('$homeFolder');
+    if (homeFolder == null) {
+      print('Failed to get home folder');
+    }
+    else {
+      //Directory target = Directory('$homeFolder/$docsFolder/$repository/$fileName');
+      final filePath = '$homeFolder/$docsFolder/$repository/$fileName';
+      print ('file -> $filePath');
+      createFileWithDirectories(filePath);
+    }
+  });
+
+
 
 }

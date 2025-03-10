@@ -35,6 +35,7 @@ class MQTTBridge {
       else {
         print('@@@@@@@ end @@@@@@@');
         String text = slicer.messagesAssembly(wrapper.chunks);
+        scheduler.removeFileEntry(wrapper.clientId, wrapper.fileName);
         print (text);
       }
     }

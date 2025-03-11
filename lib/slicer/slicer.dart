@@ -45,7 +45,7 @@ class Slicer {
       if (payload != null) {
         String? restoredMessage = addChunk(payload);
         if (restoredMessage != null) {
-          print('Message restored: $restoredMessage');
+          //print('Message restored: $restoredMessage');
           result = restoredMessage;
         }
       }

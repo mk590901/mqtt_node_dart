@@ -42,7 +42,7 @@ class Task {
     connect ((bool rc_, String parameter_) {
       rc = rc_;
       message = parameter_;
-      print('******* execute $rc, $message');
+      //@print('******* execute $rc, $message');
       //reaction.result(Response(result: rc, message: message));
     });
   }
@@ -54,7 +54,7 @@ class Task {
     disconnect ((bool rc_, String parameter_) {
       rc = rc_;
       message = parameter_;
-      print('******* execute $rc, $message');
+      //@print('******* execute $rc, $message');
       fun.call();
       //reaction.result(Response(result: rc, message: message));
     });
@@ -67,7 +67,7 @@ class Task {
     disconnectOnExit ((bool rc_, String parameter_) {
       rc = rc_;
       message = parameter_;
-      print('******* execute $rc, $message');
+      //@print('******* execute $rc, $message');
       fun.call();
       //reaction.result(Response(result: rc, message: message));
     });

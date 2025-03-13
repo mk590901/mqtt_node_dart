@@ -6,8 +6,10 @@ import 'typedef.dart';
 
 class MqttService {
 
-  static const String _server = 'test.mosquitto.org';
+  //static const String _server = 'test.mosquitto.org';
   //static const String _server = 'broker.hivemq.com';
+  static const String _server = 'broker.emqx.io';
+  //static const String _server = 'mqtt.flespi.io';
   static String flutterClient = ClientHelper.instance()?.clientId()?? 'flutter_client' ;//'flutter_client';
   final MqttServerClient _client = MqttServerClient(_server, flutterClient);
   final VoidCallbackStringBoolString _cb;

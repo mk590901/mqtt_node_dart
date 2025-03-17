@@ -76,7 +76,7 @@ class Slicer {
     }
 
     chunks[messageId]![index] = chunk;
-    print('Received chunk ${index + 1} from $total for ID $messageId');
+    //@print('Received chunk ${index + 1} from $total for ID $messageId');
 
     if (chunks[messageId]!.length == total) {
       return assembleMessage(messageId);

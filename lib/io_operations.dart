@@ -39,13 +39,13 @@ void saveFile(String fileName, String content) {
   String? homeFolder = getUserHomeDirectory();
   String docsFolder = 'Documents';
   String repository = 'Repository';
-  print('$homeFolder');
+  //@print('$homeFolder');
   if (homeFolder == null) {
     print('Failed to get home folder');
   }
   else {
     final filePath = '$homeFolder/$docsFolder/$repository/$fileName';
-    print('file -> $filePath');
+    //@print('file -> $filePath');
     createFileWithDirectories(filePath, content);
   }
 }

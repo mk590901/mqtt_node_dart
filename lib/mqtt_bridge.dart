@@ -1,7 +1,6 @@
 import 'package:mqtt_node/slicer/chunks_wrapper.dart';
 import 'package:mqtt_node/slicer/scheduler.dart';
 import 'package:mqtt_node/slicer/slicer.dart';
-
 import 'io_operations.dart';
 import 'mqtt_cs_8_helper.dart';
 import 'typedef.dart';
@@ -25,16 +24,15 @@ class MQTTBridge {
 
   void response(String tag, bool ok, String text, bool next) {
 
-    //print('MQTTBridge.response [$tag]->[$text]->[$ok]');
-    print('MQTTBridge.response [$tag]->[$ok]');
+    //print('MQTTBridge.response [$tag]->[$ok]');
 
     if (tag == 'Publish') {
       ChunksWrapper? wrapper = scheduler.addChunk(text);
       if (wrapper == null) {
-        print('@@@@@@@ continue @@@@@@@');
+        //print('@@@@@@@ continue @@@@@@@');
       }
       else {
-        print('@@@@@@@ end @@@@@@@');
+        //print('@@@@@@@ end @@@@@@@');
         String text = slicer.messagesAssembly(wrapper.chunks);
         scheduler.removeFileEntry(wrapper.clientId, wrapper.fileName);
         saveFile (wrapper.fileName, text);

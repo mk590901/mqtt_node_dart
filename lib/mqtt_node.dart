@@ -1,10 +1,7 @@
-import 'dart:async';
 import 'dart:io';
-
 import 'client_helper.dart';
 import 'task.dart';
 
-//Timer? backgroundTask;
 bool isRunning = false;
 Task task = Task();
 
@@ -31,17 +28,13 @@ void doneCommand(String command) {
 
       task.openConnection();
 
-      // backgroundTask = Timer.periodic(Duration(seconds: 2), (timer) {
-      //   if (!isRunning) {
-      //     timer.cancel();
-      //     return;
-      //   }
-      //   //print('Task in progress...');
-      // });
-    } else {
+    }
+    else {
       print('Task already in progress...');
     }
-  } else if (command == 'f') {
+  }
+  else
+  if (command == 'f') {
     if (isRunning) {
       isRunning = false;
       print('Task stopped');
@@ -55,7 +48,6 @@ void doneCommand(String command) {
     task.breakConnection((){
       exit(0);
     });
-    //exit(0);
   }
   else {
     print('Invalid command "$command", use start или stop.');

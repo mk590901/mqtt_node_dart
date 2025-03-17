@@ -17,12 +17,12 @@ class MQTTClient {
   }
 
   void connect () {
-    print('******* connect *******');
+    //print('******* connect *******');
     mqttService.connect();
   }
 
   void subscribe () {
-    print('******* subscribe *******');
+    //print('******* subscribe *******');
     mqttService.subscribe(subscribeTopic);
   }
 
@@ -32,12 +32,12 @@ class MQTTClient {
   }
 
   void unsubscribe () {
-    print('******* unsubscribe *******');
+    //print('******* unsubscribe *******');
     mqttService.unsubscribe(subscribeTopic);
   }
 
   void disconnect () {
-    print('******* disconnect *******');
+    //print('******* disconnect *******');
     mqttService.disconnect();
   }
 

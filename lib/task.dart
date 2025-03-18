@@ -1,16 +1,9 @@
-
-
-import 'i_reaction.dart';
-import 'i_response.dart';
 import 'mqtt_bridge.dart';
 import 'typedef.dart';
 
 class Task {
 
-  //final IReaction reaction;
   late  MQTTBridge mqttBridge;
-
-  //final Random random = Random();
 
   void response(bool rc, String text, bool next) {
     print ('response $rc, $text, $next');
@@ -31,7 +24,7 @@ class Task {
     mqttBridge.postComposite('Disconnect', cb);
   }
 
-  Task (/*this.reaction*/) {
+  Task () {
     mqttBridge = MQTTBridge(response);
   }
 
